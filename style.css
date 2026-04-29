@@ -14,29 +14,24 @@ body {
   font-family: 'Orbitron', Arial, sans-serif;
   color: #a0c8f0;
 
+  min-height: 100vh;
+  padding: 50px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  min-height: 100vh;
-  padding: 50px;
 
   overflow: hidden;
   position: relative;
 }
 
 /* =========================
-   VIDEO BACKGROUND
+   VIDEO BACKGROUND (FIXED)
 ========================= */
 .background {
   position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: -2;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -50,22 +45,14 @@ body {
 .background::after {
   content: "";
   position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
+  inset: 0;
   background: rgba(0, 0, 0, 0.55);
 }
 
 /* =========================
-   ENSURE UI ABOVE VIDEO
+   FORCE UI ABOVE VIDEO
 ========================= */
-h1,
-#toggleButton,
-#linkContainer {
+body > *:not(.background) {
   position: relative;
   z-index: 1;
 }
@@ -91,16 +78,15 @@ h1 {
 
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
+  color: #a0c8f0;
+  font-weight: bold;
 
   box-shadow:
     0 0 25px rgba(102, 204, 255, 0.3),
     inset 0 0 15px rgba(255, 255, 255, 0.05);
 
   cursor: pointer;
-
-  color: #a0c8f0;
-  font-weight: bold;
 
   margin-bottom: 30px;
 
@@ -121,7 +107,7 @@ h1 {
   color: white;
 }
 
-/* pulse animation */
+/* pulse */
 @keyframes pulse {
   0%, 100% {
     box-shadow: 0 0 20px rgba(102, 204, 255, 0.3);
@@ -148,26 +134,21 @@ h1 {
 
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
 
   border: 1px solid rgba(255, 255, 255, 0.15);
 
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 0 20px rgba(255, 255, 255, 0.05);
-
-  transition: all 0.4s ease;
 }
 
-/* show animation */
+/* IMPORTANT: when JS adds .show */
 #linkContainer.show {
   display: flex;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* =========================
-   LINKS (GLASS + NEON HOVER)
+   LINKS (GLASS + HOVER)
 ========================= */
 .link {
   padding: 12px 24px;
@@ -176,16 +157,11 @@ h1 {
 
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 
   border: 1px solid rgba(102, 204, 255, 0.4);
 
   color: #a0c8f0;
   text-decoration: none;
-
-  font-size: 1.1em;
-
-  box-shadow: 0 0 10px rgba(102, 204, 255, 0.2);
 
   transition: all 0.3s ease;
 }
@@ -201,5 +177,5 @@ h1 {
     0 0 25px rgba(102, 204, 255, 0.7),
     0 0 60px rgba(102, 204, 255, 0.3);
 
-  color: #ffffff;
+  color: white;
 }
